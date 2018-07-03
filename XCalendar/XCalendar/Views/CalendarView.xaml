@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:helpers="clr-namespace:XCalendar.Helpers"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             x:Class="XCalendar.Views.CalendarView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <helpers:InvertBoolConverter x:Key="invert"/>
+        </ResourceDictionary>
+    </ContentView.Resources>    
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <forms:CarouselView x:Name="carouselView" Grid.Row="0" ItemsSource="{Binding Months}">
+                <forms:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="daysRow" Height="20"/>
+                                <RowDefinition Height="600"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="Пн" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Вт" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Ср" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Чт" Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Пт" Grid.Row="0" Grid.Column="4" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Сб" Grid.Row="0" Grid.Column="5" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <Label Text="Нд" Grid.Row="0" Grid.Column="6" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                            <flv:FlowListView Grid.Row="1" Grid.ColumnSpan="7" FlowColumnCount="7" SeparatorVisibility="Default" SeparatorColor="#d1cfcf" FlowItemTapped="FlowListView_FlowItemTapped" HasUnevenRows="true" FlowItemsSource="{Binding Days}">
+                                <flv:FlowListView.FlowColumnTemplate>
+                                    <DataTemplate>
+                                        <Grid BackgroundColor="{Binding BackgroundColor}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="60"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="0" Grid.Column="0" IsEnabled="{Binding IsCurrentMonth}" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalOptions="Start" Text="{Binding DateTime.Day}" XAlign="Center" YAlign="Start" />
+                                            <Label Grid.Row="1" Grid.Column="0" FontSize="Micro" Text="{Binding OrdersString}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </flv:FlowListView.FlowColumnTemplate>
+                            </flv:FlowListView>                            
+                        </Grid>
+                    </DataTemplate>
+                </forms:CarouselView.ItemTemplate>
+            </forms:CarouselView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
